@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+Home | Francis Nepomuceno's Website
+{% endblock title %}
+
+{% block navstuff %}
+{% include 'common/nav_link.html' with link="/home/" content="Home" %}
+{% include 'common/nav_link.html' with content="Blog" %}
+{% include 'common/nav_link.html' with content="Contact" %}
+{% include 'common/nav_link.html' with content="About" %}
+{% endblock navstuff %}
+
+{% block content %}
+<h1>Welcome to my website!</h1>
+<p>And I don't know what to say yet</p>
+{% endblock content %}
+
+{% block footer %}
+<p>This website was powered by Django and Bootstrap 4.</p>
+{% endblock footer %}
