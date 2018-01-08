@@ -43,20 +43,29 @@
 <!-- Header -->
 <div class="jumbotron" id="header">
 <div class="container">
-<h1 class="display-3">Francis Nepomuceno's site</h1>
+<div class="row justify-content-center text-center">
+<div class="col-md-2 col-sm-3 col-12">
+<!-- Icon -->
+<img src="{% static 'home/icon.png' %}", alt="Icon"
+    class="img-fluid" />
 </div>
+<div class="col-md-10 col-sm-9 col-12">
+<!-- Text -->
+<h1 class="display-4">Francis Nepomuceno's site</h1>
+<h4>Some tagline I have yet to come up with</h4>
 </div>
+</div></div></div>
 
 <!-- Sidebar -->
 <div class="row">
-<div class="col-sm-3 col-xs-12" id="sidebar">
+<div class="col-sm-3 col-12" id="sidebar">
 <ul class="nav flex-column sticky-top" id="sidenav">
 {% block navstuff %}{% endblock navstuff %}
 </ul>
 </div>
 
 <!-- Content -->
-<div class="col-sm-9 col-xs-12" id="wrapper">
+<div class="col-sm-9 col-12" id="wrapper">
 <div class="container">
 {% block content %}{% endblock content %}
 </div>
