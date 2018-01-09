@@ -1,0 +1,18 @@
+{% include 'common/nav/link.html' with link="/home/" content="Home" %}
+{% include 'common/nav/inner_start.html' with id="blog" content="Blog" %}
+<li class="nav-item">
+<div class="nav-link">
+<div class="input-group">
+<input type="text" class="form-control" placeholder="Search Blog"
+    aria-label="Search Box" aria-describedby="blog-search">
+<div class="input-group-append">
+<button class="btn sidenav-item" type="button" id="blog-search">
+Search
+</button>
+</div>
+</div>
+</div>
+</li>
+{% include 'common/nav/link.html' with link="/blog/" content="Most Recent Posts" %}
+{% include 'common/nav/inner_end.html' %}
+{% include 'common/nav/link.html' with content="Contact" %}

@@ -10,7 +10,6 @@
 <style>
 #header {
     background-color: rgba(255, 137, 78, 1.0);
-    border-radius: 0;
     margin-bottom: 15px;
     padding: 15px;
 }
@@ -18,6 +17,7 @@
     max-height:120px;
 }
 #sidebar {
+    padding-left: 0px;
     padding-right: 0px;
 }
 #sidenav {
@@ -30,10 +30,11 @@
     border-color: rgba(255, 137, 78, 1.0);
 }
 .sidenav-item:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 204, 179, 1.0);
     background-color: rgba(255, 137, 78, 1.0);
 }
 #footer {
+    background-color: rgba(255, 204, 179, 1.0);
     position: absolute;
     width: 100%;
     margin-bottom: 0px;
@@ -44,7 +45,7 @@
 <body>
 
 <!-- Header -->
-<div class="jumbotron" id="header">
+<div class="jumbotron jumbotron-fluid" id="header">
 <div class="container">
 <div class="row justify-content-center text-center">
 <div class="col-md-2 col-sm-3 col-12">
@@ -61,10 +62,11 @@
 <!-- Sidebar -->
 <div class="container-fluid"><div class="row">
 <div class="col-sm-3 col-12" id="sidebar">
+<div class="navbar-collapse" id="navbar">
 <ul class="nav flex-column sticky-top" id="sidenav">
 {% block navstuff %}{% endblock navstuff %}
 </ul>
-</div>
+</div></div>
 
 <!-- Content -->
 <div class="col-sm-9 col-12" id="wrapper">
@@ -73,7 +75,7 @@
 </div></div></div></div>
 
 <!-- Footer -->
-<div class="jumbotron" id="footer">
+<div class="jumbotron jumbotron-fluid" id="footer">
 <div class="container">
 {% block footer %}{% endblock footer %}
 </div></div>
