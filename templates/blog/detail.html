@@ -1,0 +1,27 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+Blog | Francis Nepomuceno's Website
+{% endblock title %}
+
+{% block header %}
+<h1 class="display-4">Blog Posts</h1>
+{% endblock header %}
+
+{% block navstuff %}
+{% include 'common/nav_items.html' %}
+{% endblock navstuff %}
+
+{% block content %}
+<h1 class='display-4'>{{ post.title }}</h1>
+<h2>by: {{ post.author }}</h2>
+{{ post.content }}
+<br />
+<a class="btn btn-primary" href="{% url 'blog:index' %}">
+Back to Blog Posts
+</a>
+{% endblock content %}
+
+{% block footer %}
+<p>This website was powered by Django and Bootstrap 4.</p>
+{% endblock footer %}

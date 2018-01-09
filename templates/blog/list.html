@@ -13,8 +13,25 @@ Blog | Francis Nepomuceno's Website
 {% endblock navstuff %}
 
 {% block content %}
-<h1>Welcome to my website!</h1>
-<p>And I don't know what to say yet</p>
+{% if post_list %}
+{% for post in post_list %}
+<div class="card mb-3"><div class="card-body">
+    <h4 class="card-title">{{ post.title }}</h4>
+    <strong class="card-text">By: {{ post.author }}</strong>
+    <br />
+    {{ post.content|truncatewords:15 }}
+    <br />
+    <a class="btn btn-primary" href="{{ post.get_absolute_url }}">
+        Read More
+    </a>
+    <p class="card-text"><small class="text-muted">
+    Last updated on: {{ post.last_updated }}
+    </small></p>
+</div></div>
+{% endfor %}
+{% else %}
+<h1>No posts available</h1>
+{% endif %}
 {% endblock content %}
 
 {% block footer %}
