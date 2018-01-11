@@ -1,6 +1,43 @@
 from django.conf import settings
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.db import models
 from django.urls import reverse
+
+from .managers import BlogUserManager
+
+class BlogUser(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=125, unique=True)
+    email = models.EmailField(max_length=255, unique=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+
+    objects = BlogUserManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
+
+    def __str__(self):
+        return self.username
+
+    def __unicode(self):
+        return self.__str__()
+
+    def get_full_name(self):
+        return self.username
+
+    def get_short_name(self):
+        return self.username
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    @property
+    def is_staff(self):
+        return self.is_admin
 
 class Post(models.Model):
     # Main Content
