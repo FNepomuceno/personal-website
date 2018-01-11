@@ -19,7 +19,8 @@ Blog | Francis Nepomuceno's Website
     <h4 class="card-title">{{ post.title }}</h4>
     <strong class="card-text">By: {{ post.author }}</strong>
     <br />
-    {{ post.content|truncatewords:15 }}
+    {% load markdown %}
+    {{ post.content|markdown|safe|truncatewords_html:15 }}
     <br />
     <a class="btn btn-primary" href="{{ post.get_absolute_url }}">
         Read More

@@ -14,7 +14,7 @@
     padding: 15px;
 }
 #icon {
-    max-height:120px;
+    max-height: 5em;
 }
 #sidebar {
     padding-left: 0px;
@@ -87,13 +87,20 @@
 
 <!-- Other scripts -->
 <script>
-$(document).ready(function(){
+function floor_footer() {
+    bottom_padding = 15;
     content_bottom = $("#wrapper").position().top
-        + $("#wrapper").outerHeight(true);
+        + $("#wrapper").outerHeight(true) + bottom_padding;
     document_bottom = $(document).height() -
         $("#footer").outerHeight(true);
     footer_top = Math.max(content_bottom, document_bottom);
     $("#footer").css("top", footer_top);
+}
+$(document).ready(function(){
+    floor_footer();
+});
+$(window).on('resize', function(){
+    floor_footer();
 });
 </script>
 </body>
