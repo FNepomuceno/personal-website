@@ -1,4 +1,6 @@
 {% extends "common/base.html" %}
+{% load toc_nav %}
+{% load sectionizer %}
 
 {% block title %}
 Blog | Francis Nepomuceno's Website
@@ -8,8 +10,10 @@ Blog | Francis Nepomuceno's Website
 <h1>Blog Posts</h1>
 {% endblock header %}
 
+
 {% block navstuff %}
 {% include 'common/nav/items.html' %}
+{{ post.content|mark_nav|safe }}
 {% endblock navstuff %}
 
 {% block content %}
@@ -18,9 +22,6 @@ Blog | Francis Nepomuceno's Website
 <span class='display-4'>{{ post.title }}</span>&emsp;
 <span class='h2 text-muted'>by: {{ post.author }}</span>
 </header>
-{% load toc_nav %}
-{{ post.content|mark_toc|safe }}
-{% load sectionizer %}
 {{ post.content|mark_sections|safe }}
 <br />
 <a class="btn btn-primary" href="{% url 'blog:index' %}">
