@@ -13,16 +13,20 @@ Blog | Francis Nepomuceno's Website
 {% endblock navstuff %}
 
 {% block content %}
-<p>
+<div class="card mb-3"><div class="card-body">
+<header>
 <span class='display-4'>{{ post.title }}</span>&emsp;
 <span class='h2 text-muted'>by: {{ post.author }}</span>
-</p>
-{% load markdown %}
+</header>
+{% load toc_nav %}
+{{ post.content|mark_toc|safe }}
+{% load sectionizer %}
 {{ post.content|mark_sections|safe }}
 <br />
 <a class="btn btn-primary" href="{% url 'blog:index' %}">
 Back to Blog Posts
 </a>
+</div></div>
 {% endblock content %}
 
 {% block footer %}
