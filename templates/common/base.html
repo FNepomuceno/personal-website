@@ -96,9 +96,15 @@ function floor_footer() {
     $("#footer").css("top", footer_top);
 }
 function sidebar_offset() {
-    var e_top = $("#wrapper").offset().top;
-    var d_top = $(window).scrollTop();
-    return e_top - d_top;
+    e_top = $("#wrapper").offset().top;
+    d_top = $(window).scrollTop();
+    top_diff = e_top - d_top;
+
+    div_bot = $("#footer").offset().top;
+    height = $("#navbar").height();
+    size_diff = div_bot - height;
+    size_diff = e_top - size_diff;
+    return Math.max(top_diff, size_diff);
 }
 function reposition_sidebar() {
     offset = sidebar_offset();
@@ -129,6 +135,12 @@ $(document).ready(function(){
         text = elem.text();
         text = text.slice(0, text.length - 1) + "◀";
         elem.text(text);
+    });
+    $(".collapse").on("hidden.bs.collapse", function(e) {
+        reposition_sidebar()
+    });
+    $(".collapse").on("shown.bs.collapse", function(e) {
+        reposition_sidebar()
     });
 });
 $(window).scroll(function(){
