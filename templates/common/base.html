@@ -60,7 +60,7 @@
 
 <!-- Sidebar -->
 <div class="container-fluid"><div class="row">
-<div class="col-sm-3 col-12" id="sidebar">
+<div class="d-none d-sm-block col-sm-3 col-12" id="sidebar">
 <div class="navbar-collapse mb-3" id="navbar">
 <ul class="nav flex-column" id="sidenav">
 {% block navstuff %}{% endblock navstuff %}
@@ -95,8 +95,44 @@ function floor_footer() {
     footer_top = Math.max(content_bottom, document_bottom);
     $("#footer").css("top", footer_top);
 }
+function sidebar_offset() {
+    var e_top = $("#wrapper").offset().top;
+    var d_top = $(window).scrollTop();
+    return e_top - d_top;
+}
+function reposition_sidebar() {
+    offset = sidebar_offset();
+    if(offset >= 0) {
+        $("#sidenav").css({position:'static'});
+    } else {
+        $("#sidenav").css({position:'relative', top:-1*offset});
+    }
+}
 $(document).ready(function(){
     floor_footer();
+    $(".collapse").each(function() {
+        elem = $(this).parent().children().eq(0);
+        text = elem.text() + " ◀";
+        elem.text(text);
+    });
+    $(".collapse").on("show.bs.collapse", function() {
+        elem = $(this).parent().children().eq(0);
+        text = elem.text();
+        text = text.slice(0, text.length - 1) + "▼";
+        elem.text(text);
+    });
+    $(".collapse").on("hide.bs.collapse", function(e) {
+        if(e.currentTarget != e.target) {
+            return;
+        }
+        elem = $(this).parent().children().eq(0);
+        text = elem.text();
+        text = text.slice(0, text.length - 1) + "◀";
+        elem.text(text);
+    });
+});
+$(window).scroll(function(){
+    reposition_sidebar();
 });
 $(window).on('resize', function(){
     floor_footer();

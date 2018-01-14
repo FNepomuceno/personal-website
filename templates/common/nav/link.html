@@ -1,6 +1,12 @@
 <li class="nav-item">
+{% if link %}
 <a class="nav-link sidenav-item"
-    href="{{ link|default:"javascript:void(0);" }}">
+    href="{{ link }}">
 {{ content }}
 </a>
+{% else %}
+<p class="nav-link sidenav-item mb-0">
+{{ content }}
+</p>
+{% endif %}
 </li>

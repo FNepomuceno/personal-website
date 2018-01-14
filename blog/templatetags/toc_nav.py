@@ -106,6 +106,9 @@ class NavBarMaker(Treeprocessor):
                 nesting[1][0].insert(0, self.make_link(new_link))
             else:
                 new_tree[1][0].append(self.make_link(item[0]))
+        divider = etree.Element("li")
+        divider.set("class", "dropdown-divider")
+        new_tree[1][0].append(divider)
         return new_tree
 
     def make_link(self, link):
@@ -121,14 +124,13 @@ class NavBarMaker(Treeprocessor):
         raw_link = search("#article-(.*)", link).group(1)
         new_link = "toc-{}".format(raw_link)
 
-        link_item = etree.Element("a")
-        link_item.set("class", "nav-link sidenav-item")
+        link_item = etree.Element("p")
+        link_item.set("class", "nav-link sidenav-item mb-0")
         link_item.set("data-toggle", "collapse")
         link_item.set("data-target", "{}{}".format("#", new_link))
-        link_item.set("href", "javascript:void(0);")
         link_item.set("aria-expanded", "false")
         link_item.set("aria-controls", new_link)
-        link_item.text = "{} {}".format(title, "▼")
+        link_item.text = title
         list_item.append(link_item)
 
         div_item = etree.Element("div")
