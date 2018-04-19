@@ -16,21 +16,9 @@
 #icon {
     max-height: 5em;
 }
-#sidebar {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-#sidenav {
-}
-.sidenav-item {
-    color: rgba(255, 137, 78, 1.0);
-    background-color: rgba(255, 255, 255, 0.5);
-    background-image: none;
-    border-color: rgba(255, 137, 78, 1.0);
-}
 .sidenav-item:hover {
     color: rgba(255, 204, 179, 1.0);
-    background-color: rgba(255, 137, 78, 1.0);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 #footer {
     background-color: rgba(255, 204, 179, 1.0);
@@ -44,34 +32,31 @@
 <body>
 
 <!-- Header -->
-<div class="jumbotron jumbotron-fluid" id="header">
-<div class="container">
-<div class="row justify-content-center text-center">
-<div class="col-md-2 col-sm-3 col-12">
-<!-- Icon -->
-<img src="{% static 'home/icon.png' %}", alt="Icon"
-    class="img-fluid" id="icon" />
-</div>
-<div class="col-md-10 col-sm-9 col-12">
-<!-- Text -->
+<header class="navbar navbar-light" id="header">
 {% block header %}{% endblock header %}
-</div>
-</div></div></div>
-
-<!-- Sidebar -->
-<div class="container-fluid"><div class="row">
-<div class="d-none d-sm-block col-sm-3 col-12" id="sidebar">
-<div class="navbar-collapse mb-3" id="navbar">
-<ul class="nav flex-column" id="sidenav">
+<button class="navbar-toggler navbar-toggler-right" type="button"
+    data-toggle="collapse" data-target="#navbar-content"
+    aria-controls="navbar-content" aria-expanded="false"
+    aria-label="Toggle Navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbar-content"
+    aria-expanded="false">
+<ul class="navbar-nav mr-auto">
 {% block navstuff %}{% endblock navstuff %}
 </ul>
-</div></div>
+</div>
+</header>
 
 <!-- Content -->
-<div class="col-sm-9 col-12" id="wrapper">
-<div class="container">
+<div class="container-fluid"><div class="row">
+<div class="col-md-1 d-md-block d-sm-none"></div>
+<div class="col-md-10 col-12">
+<div class="container-fluid px-0" id="content">
 {% block content %}{% endblock content %}
-</div></div></div></div>
+</div></div>
+<div class="col-md-1 d-md-block d-sm-none"></div>
+</div></div>
 
 <!-- Footer -->
 <div class="jumbotron jumbotron-fluid" id="footer">
@@ -80,54 +65,43 @@
 </div></div>
 
 <!-- JQuery, Popper, Bootstrap scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+    integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+    crossorigin="anonymous"></script>
 
 <!-- Other scripts -->
 <script>
 function floor_footer() {
     bottom_padding = 15;
-    content_bottom = $("#wrapper").position().top
-        + $("#wrapper").outerHeight(true) + bottom_padding;
+    content_bottom = $("#content").position().top
+        + $("#content").outerHeight(true) + bottom_padding;
     document_bottom = $(document).height() -
         $("#footer").outerHeight(true);
     footer_top = Math.max(content_bottom, document_bottom);
     $("#footer").css("top", footer_top);
 }
-function sidebar_offset() {
-    e_top = $("#wrapper").offset().top;
-    d_top = $(window).scrollTop();
-    top_diff = e_top - d_top;
-
-    div_bot = $("#footer").offset().top;
-    height = $("#navbar").height();
-    size_diff = div_bot - height;
-    size_diff = e_top - size_diff;
-    return Math.max(top_diff, size_diff);
-}
-function reposition_sidebar() {
-    offset = sidebar_offset();
-    if(offset >= 0) {
-        $("#sidenav").css({position:'static'});
-    } else {
-        $("#sidenav").css({position:'relative', top:-1*offset});
-    }
-}
-$(document).ready(function(){
-    floor_footer();
+function setup_collapse() {
     $(".collapse").each(function() {
+        if(!$(this).parent().is("li")) return;
         elem = $(this).parent().children().eq(0);
         text = elem.text() + " ◀";
         elem.text(text);
     });
     $(".collapse").on("show.bs.collapse", function() {
+        if(!$(this).parent().is("li")) return;
         elem = $(this).parent().children().eq(0);
         text = elem.text();
         text = text.slice(0, text.length - 1) + "▼";
         elem.text(text);
     });
     $(".collapse").on("hide.bs.collapse", function(e) {
+        if(!$(this).parent().is("li")) return;
         if(e.currentTarget != e.target) {
             return;
         }
@@ -137,14 +111,17 @@ $(document).ready(function(){
         elem.text(text);
     });
     $(".collapse").on("hidden.bs.collapse", function(e) {
+        if(!$(this).parent().is("li")) return;
         reposition_sidebar()
     });
     $(".collapse").on("shown.bs.collapse", function(e) {
+        if(!$(this).parent().is("li")) return;
         reposition_sidebar()
     });
-});
-$(window).scroll(function(){
-    reposition_sidebar();
+}
+$(document).ready(function(){
+    floor_footer();
+    setup_collapse();
 });
 $(window).on('resize', function(){
     floor_footer();
