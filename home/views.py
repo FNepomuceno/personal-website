@@ -1,17 +1,6 @@
-from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponse
 
-def default(request):
-    return index(request)
-    #return debug(request)
+# Create your views here.
+def index():
+    return HttpResponse("Website under renovation")
 
-def index(request):
-    return render(request, 'home/index.html')
-
-def debug(request):
-    return render(request, 'home/sample.html')
-
-def home(request):
-    return redirect(reverse('home:default'))
-
-def blog(request):
-    return redirect(reverse('blog:index'))
