@@ -4,7 +4,7 @@
 - Gunicorn and Nginx are used for deploying the project online
 
 ## Using the Virtual Environment
-- in the root directory, enter: `source webenv/bin/activate`
+- in the root directory, enter: `source venv/bin/activate`
 - to exit out of the virtual environment, enter: `deactivate`
 
 ## SETUP
