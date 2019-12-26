@@ -1,23 +1,24 @@
 {% extends "common/base.html" %}
 
 {% block title %}
-Home | Francis Nepomuceno's Website
+Home | Francis Nepomuceno
 {% endblock title %}
 
 {% block header %}
-<h1>Francis Nepomuceno's site</h1>
-<h4>Some tagline I have yet to come up with</h4>
+<h1>Francis Nepomuceno</h1>
 {% endblock header %}
 
-{% block navstuff %}
-{% include 'common/nav/items.html' %}
-{% endblock navstuff %}
-
 {% block content %}
-<h1>Welcome to my website!</h1>
-<p>And I don't know what to say yet</p>
+<h2>Programmer and Math Enthusiast</h2>
 {% endblock content %}
 
 {% block footer %}
-<p>This website was powered by Django and Bootstrap 4.</p>
+<div class="footer-col">
+<h4>Navigation</h4><hr />
+Home
+</div>
+<div class="footer-col">
+<h4>Contact Info</h4><hr />
+<i>Email Address:</i> francisnepo@gmail.com
+</div>
 {% endblock footer %}

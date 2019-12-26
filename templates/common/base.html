@@ -6,126 +6,73 @@
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 {% load static %}
 <title>{% block title %}{% endblock title %}</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <style>
+html, body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+body {
+    font-family: "Verdana", sans-serif;
+    margin: 0;
+    flex-grow: 1;
+}
 #header {
-    background-color: rgba(255, 137, 78, 1.0);
-    margin-bottom: 15px;
-    padding: 15px;
+    background-color: #fc1;
+    color: #321;
+    height: 5em;
+    padding: 0 3em;
 }
-#icon {
-    max-height: 5em;
+#container {
+    background-color: #ffc;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
 }
-.sidenav-item:hover {
-    color: rgba(255, 204, 179, 1.0);
-    background-color: rgba(255, 255, 255, 0.3);
+.side {
+    flex-grow: 1;
+}
+#content {
+    padding: 1.5em 0;
+    width: 30em;
+    flex-basis: 50em;
+    color: #321;
 }
 #footer {
-    background-color: rgba(255, 204, 179, 1.0);
-    position: absolute;
-    width: 100%;
-    margin-bottom: 0px;
-    padding: 15px;
+    display: flex;
+    background-color: #fd5;
+    padding: 1em 1em;
+    min-height: 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.footer-col {
+    min-width: 15em;
+    margin: 0 0.5em;
 }
 </style>
 </head>
 <body>
 
 <!-- Header -->
-<header class="navbar navbar-light" id="header">
+<header id="header">
 {% block header %}{% endblock header %}
-<button class="navbar-toggler navbar-toggler-right" type="button"
-    data-toggle="collapse" data-target="#navbar-content"
-    aria-controls="navbar-content" aria-expanded="false"
-    aria-label="Toggle Navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbar-content"
-    aria-expanded="false">
-<ul class="navbar-nav mr-auto">
-{% block navstuff %}{% endblock navstuff %}
-</ul>
-</div>
 </header>
 
 <!-- Content -->
-<div class="container-fluid"><div class="row">
-<div class="col-md-1 d-md-block d-sm-none"></div>
-<div class="col-md-10 col-12">
-<div class="container-fluid px-0" id="content">
+<div id="container">
+<div class="side"></div>
+<div id="content">
 {% block content %}{% endblock content %}
-</div></div>
-<div class="col-md-1 d-md-block d-sm-none"></div>
-</div></div>
+</div>
+<div class="side"></div>
+</div>
 
 <!-- Footer -->
-<div class="jumbotron jumbotron-fluid" id="footer">
-<div class="container">
+<div id="footer">
 {% block footer %}{% endblock footer %}
-</div></div>
+</div>
 
-<!-- JQuery, Popper, Bootstrap scripts -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
-    integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
-    crossorigin="anonymous"></script>
-
-<!-- Other scripts -->
-<script>
-function floor_footer() {
-    bottom_padding = 15;
-    content_bottom = $("#content").position().top
-        + $("#content").outerHeight(true) + bottom_padding;
-    document_bottom = $(document).height() -
-        $("#footer").outerHeight(true);
-    footer_top = Math.max(content_bottom, document_bottom);
-    $("#footer").css("top", footer_top);
-}
-function setup_collapse() {
-    $(".collapse").each(function() {
-        if(!$(this).parent().is("li")) return;
-        elem = $(this).parent().children().eq(0);
-        text = elem.text() + " ◀";
-        elem.text(text);
-    });
-    $(".collapse").on("show.bs.collapse", function() {
-        if(!$(this).parent().is("li")) return;
-        elem = $(this).parent().children().eq(0);
-        text = elem.text();
-        text = text.slice(0, text.length - 1) + "▼";
-        elem.text(text);
-    });
-    $(".collapse").on("hide.bs.collapse", function(e) {
-        if(!$(this).parent().is("li")) return;
-        if(e.currentTarget != e.target) {
-            return;
-        }
-        elem = $(this).parent().children().eq(0);
-        text = elem.text();
-        text = text.slice(0, text.length - 1) + "◀";
-        elem.text(text);
-    });
-    $(".collapse").on("hidden.bs.collapse", function(e) {
-        if(!$(this).parent().is("li")) return;
-        reposition_sidebar()
-    });
-    $(".collapse").on("shown.bs.collapse", function(e) {
-        if(!$(this).parent().is("li")) return;
-        reposition_sidebar()
-    });
-}
-$(document).ready(function(){
-    floor_footer();
-    setup_collapse();
-});
-$(window).on('resize', function(){
-    floor_footer();
-});
-</script>
 </body>
 </html>
