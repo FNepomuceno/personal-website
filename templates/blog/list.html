@@ -1,40 +1,25 @@
 {% extends "common/base.html" %}
 
 {% block title %}
-Blog | Francis Nepomuceno's Website
+Blog | Francis Nepomuceno
 {% endblock title %}
 
 {% block header %}
 <h1>Blog</h1>
 {% endblock header %}
 
-{% block navstuff %}
-{% include 'common/nav/items.html' %}
-{% endblock navstuff %}
-
 {% block content %}
-{% if post_list %}
-{% for post in post_list %}
-<div class="card mb-3"><div class="card-body">
-    <h4 class="card-title">{{ post.title }}</h4>
-    <strong class="card-text">By: {{ post.author }}</strong>
-    <br />
-    {% load markdown %}
-    {{ post.content|markdown|safe|truncatewords_html:15 }}
-    <br />
-    <a class="btn btn-primary" href="{{ post.get_absolute_url }}">
-        Read More
-    </a>
-    <p class="card-text"><small class="text-muted">
-    Last updated on: {{ post.last_updated }}
-    </small></p>
-</div></div>
-{% endfor %}
-{% else %}
-<h1>No posts available</h1>
-{% endif %}
+<h2>Coming Soon</h2>
 {% endblock content %}
 
 {% block footer %}
-<p>This website was powered by Django and Bootstrap 4.</p>
+<div class="footer-col">
+<h4>Navigation</h4><hr />
+<p><a href="{% url 'home:index' %}">Home</a></p>
+<p>Blog</p>
+</div>
+<div class="footer-col">
+<h4>Contact Info</h4><hr />
+<i>Email Address:</i> francisnepo@gmail.com
+</div>
 {% endblock footer %}
