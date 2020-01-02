@@ -1,0 +1,63 @@
+/* BASE CSS */
+
+html, body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+body {
+    font-family: "Verdana", sans-serif;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* HEADER */
+
+#header {
+    background-color: #fc1;
+    color: #321;
+    height: 5em;
+    padding: 0 3em;
+}
+
+/* CONTENT */
+
+#container {
+    background-color: #ffc;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.side {
+    flex-grow: 1;
+}
+
+#content {
+    padding: 1.5em 0;
+    width: 30em;
+    flex-basis: 50em;
+    color: #321;
+}
+
+/* FOOTER */
+
+#footer {
+    display: flex;
+    background-color: #fd5;
+    padding: 1em 1em;
+    min-height: 3em;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-col {
+    min-width: 15em;
+    margin: 0 0.5em;
+}
+
+.footer-col >:first-child {
+    margin-top: 0;
+}
