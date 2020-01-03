@@ -4,20 +4,38 @@
 Blog | Francis Nepomuceno
 {% endblock title %}
 
+{% block styles %}
+{{ block.super }}
+<style>
+#content > div > :first-child {
+  margin-top: 0;
+}
+#content > div {
+  margin-bottom: 2em;
+}
+</style>
+{% endblock styles %}
+
 {% block header %}
 <h1>Blog</h1>
 {% endblock header %}
 
 {% block content %}
-<h2>Coming Soon</h2>
+{% if posts %}
+{% for post in posts %}
+<div>
+  <h2>{{ post.title }}</h2>
+  <p><strong>By: {{ post.author }}</strong></p>
+  {{ post.content }}
+</div>
+{% endfor %}
+{% else %}
+<h2>No posts available</h2>
+{% endif %}
 {% endblock content %}
 
 {% block footer %}
-<div class="footer-col">
-<h4>Navigation</h4><hr />
-<p><a href="{% url 'home:index' %}">Home</a></p>
-<p>Blog</p>
-</div>
+{% include 'common/nav_urls.html' %}
 <div class="footer-col">
 <h4>Contact Info</h4><hr />
 <i>Email Address:</i> francisnepo@gmail.com
