@@ -1,13 +1,21 @@
-# About
-- The website uses the Django framework in Python as its backend
-- PostgreSQL is used as the database
-- Gunicorn and Nginx are used for deploying the project online
+# Personal Website
+**by Francis Nepomuceno**
 
-## Using the Virtual Environment
+## About
+- The website uses the Django framework in Python as its backend
+- A local MySQL database is used as the DB the Django app uses
+- Gunicorn and Nginx are used for deploying the project online
+- The server itself is hosted as an EC2 instance from Amazon AWS. The OS used
+with EC2 is Ubuntu 18.04
+- Domains can be purchased from a number of sites. This website uses Google
+Domains for its domain
+
+### Using the Virtual Environment
 - in the root directory, enter: `source venv/bin/activate`
 - to exit out of the virtual environment, enter: `deactivate`
 
-## SETUP
-- The project uses PostgreSQL. Follow the instructions to set up the PostgreSQL database at the following website:
-> https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04#create-the-postgresql-database-and-user
-- The database information and Django secret key are kept in a file called secret.py. Rename the secret.py.template file to secret.py and fill in the relevant information.
+### Setup
+- Nginx configuration files (coming soon to the repo) will be needed to set
+up the portion of the webserver hosted by Nginx
+- Scripts (coming soon to the repo) will show how to set up packages required
+by the OS, and how to set up the MySQL database
