@@ -1,35 +1,47 @@
 {% extends "common/base.html" %}
-{% load toc_nav %}
-{% load sectionizer %}
+
 
 {% block title %}
-{{ post.title }} | Francis Nepomuceno's Website
+{{ post.title }} | Francis Nepomuceno
 {% endblock title %}
+
+
+{% block styles %}
+{{ block.super }}
+<style>
+#content > header > h1 {
+  margin-top: 0;
+}
+#content {
+  margin-bottom: 5em;
+}
+</style>
+{% endblock styles %}
+
 
 {% block header %}
 <h1>Blog</h1>
 {% endblock header %}
 
 
-{% block navstuff %}
-{% include 'common/nav/items.html' %}
-{{ post.content|mark_nav|safe }}
-{% endblock navstuff %}
-
 {% block content %}
-<div class="card mb-3"><div class="card-body">
+{% load common_tags %}
 <header>
-<span class='display-4'>{{ post.title }}</span>&emsp;
-<span class='h2 text-muted'>by: {{ post.author }}</span>
+<h1>{{ post.title }}</h1>
+<p><strong>By: {{ post.author }}</strong></p>
 </header>
-{{ post.content|mark_sections|safe }}
+{{ post.content | markdown | safe }}
 <br />
-<a class="btn btn-primary" href="{% url 'blog:index' %}">
+<a href="{% url 'blog:index' %}">
 Back to Blog Posts
 </a>
-</div></div>
 {% endblock content %}
 
+
 {% block footer %}
-<p>This website was powered by Django and Bootstrap 4.</p>
+{% include 'common/nav_urls.html' %}
+<div class="footer-col">
+<h4>Contact Info</h4><hr />
+<i>Email Address:</i> francisnepo@gmail.com
+</div>
 {% endblock footer %}

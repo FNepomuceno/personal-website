@@ -31,7 +31,8 @@ Blog | Francis Nepomuceno
 <div>
   <h1>{{ post.title }}</h1>
   <p><strong>By: {{ post.author }}</strong></p>
-  {{ post.content | markdown | safe }}
+  {{ post.content | markdown | safe | truncatewords_html:15 }}
+  <a href="{{ post.get_absolute_url }}">Read More</a>
 </div>
 {% endfor %}
 {% else %}
