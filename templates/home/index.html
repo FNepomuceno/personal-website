@@ -12,7 +12,8 @@ Home | Francis Nepomuceno
 
 
 {% block content %}
-<h2>Programmer and Math Enthusiast</h2>
+{% load common_tags %}
+{{ 'home/markdown/index.md' | print_static | markdown | safe }}
 {% endblock content %}
 
 
