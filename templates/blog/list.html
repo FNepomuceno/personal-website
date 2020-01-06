@@ -26,7 +26,7 @@ Blog | Francis Nepomuceno
 
 {% block content %}
 {% if posts %}
-{% load markdown_extras %}
+{% load common_tags %}
 {% for post in posts %}
 <div>
   <h1>{{ post.title }}</h1>
