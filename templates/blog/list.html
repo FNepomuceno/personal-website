@@ -1,8 +1,10 @@
 {% extends "common/base.html" %}
 
+
 {% block title %}
 Blog | Francis Nepomuceno
 {% endblock title %}
+
 
 {% block styles %}
 {{ block.super }}
@@ -11,28 +13,32 @@ Blog | Francis Nepomuceno
   margin-top: 0;
 }
 #content > div {
-  margin-bottom: 2em;
+  margin-bottom: 5em;
 }
 </style>
 {% endblock styles %}
+
 
 {% block header %}
 <h1>Blog</h1>
 {% endblock header %}
 
+
 {% block content %}
 {% if posts %}
+{% load markdown_extras %}
 {% for post in posts %}
 <div>
-  <h2>{{ post.title }}</h2>
+  <h1>{{ post.title }}</h1>
   <p><strong>By: {{ post.author }}</strong></p>
-  {{ post.content }}
+  {{ post.content | markdown | safe }}
 </div>
 {% endfor %}
 {% else %}
 <h2>No posts available</h2>
 {% endif %}
 {% endblock content %}
+
 
 {% block footer %}
 {% include 'common/nav_urls.html' %}
