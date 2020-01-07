@@ -4,6 +4,8 @@ from . import views
 app_name='blog'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('login/', views.blog_login, name='login'),
+    path('logout/', views.blog_logout, name='logout'),
     path('<slug:url_name>/', views.post_detail, name='detail'),
     # path('page/<int:page>/', views.page_list, name='list'),
 ]

@@ -47,4 +47,9 @@ Blog | Francis Nepomuceno
 <h4>Contact Info</h4><hr />
 <i>Email Address:</i> francisnepo@gmail.com
 </div>
+{% if user.is_authenticated %}
+{% include 'blog/authenticated/list.html' %}
+{% else %}
+{% include 'blog/login.html' %}
+{% endif %}
 {% endblock footer %}
